@@ -1,7 +1,7 @@
 local socket = require("socket")
 
 local function respondOnHello()
-    local server = assert(socket.bind("*", 53444))
+    local server = assert(socket.bind("0.0.0.0", 53333))
     while true do
         local client = server:accept()
         client:settimeout(10)

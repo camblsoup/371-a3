@@ -19,7 +19,7 @@ end
 
 local function queryOnce()
     local udp = socket.udp()
-    udp:setpeername("127.0.0.1", 53444)
+    udp:setpeername("192.168.1.77", 53444)
 
     local startTime = get_time()
     udp:send("hello UDP")
@@ -35,7 +35,7 @@ end
 
 local function queryThousand()
     local udp = socket.udp()
-    udp:setpeername("127.0.0.1", 53444)
+    udp:setpeername("192.168.1.77", 53444)
 
     local startTime = get_time()
     for i = 0, 1000, 1 do

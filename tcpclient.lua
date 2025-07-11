@@ -19,7 +19,7 @@ end
 
 local function queryOnce()
     local client = assert(socket.tcp())
-    assert(client:connect("127.0.0.1", 53444))
+    assert(client:connect("192.168.1.77", 53333))
 
     local startTime = get_time()
     client:send("hello TCP\n")
@@ -38,7 +38,7 @@ end
 
 local function queryThousand()
     local client = assert(socket.tcp())
-    assert(client:connect("127.0.0.1", 53333))
+    assert(client:connect("192.168.1.77", 53333))
 
     local startTime = get_time()
     for i = 0, 1000, 1 do
@@ -57,5 +57,5 @@ local function queryThousand()
     print("Round Trip Time: " .. (endTime - startTime) * 1000 .. "ms")
 end
 
-queryOnce()
---queryThousand()
+--queryOnce()
+queryThousand()

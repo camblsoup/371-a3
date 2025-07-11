@@ -29,5 +29,5 @@ local function respondAfterThousand()
     end
 end
 
-respondOnHello()
---respondAfterThousand()
+--respondOnHello()
+respondAfterThousand()
