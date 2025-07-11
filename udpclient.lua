@@ -18,44 +18,39 @@ end
 
 
 local function queryOnce()
-    local client = assert(socket.tcp())
-    assert(client:connect("127.0.0.1", 53444))
+    local udp = socket.udp()
+    udp:setpeername("127.0.0.1", 53444)
 
     local startTime = get_time()
-    client:send("hello TCP\n")
-    local line, err = client:receive()
+    udp:send("hello UDP")
+    local line, err = udp:receive()
     local endTime = get_time()
-    if client then
-        client:close()
-    end
+    print(line)
     if not err then
-        print(line)
+        print("Round Trip Time: " .. (endTime - startTime) * 1000 .. "ms")
     else
         print(err)
     end
-    print("Round Trip Time: " .. (endTime - startTime) * 1000 .. "ms")
 end
 
 local function queryThousand()
-    local client = assert(socket.tcp())
-    assert(client:connect("127.0.0.1", 53333))
+    local udp = socket.udp()
+    udp:setpeername("127.0.0.1", 53444)
 
     local startTime = get_time()
     for i = 0, 1000, 1 do
-        client:send("hello TCP\n")
+        udp:send("hello UDP")
     end
-    local line, err = client:receive()
+    local line, err = udp:receive()
     local endTime = get_time()
-    if client then
-        client:close()
-    end
+    print(line)
     if not err then
-        print(line)
+        print("Round Trip Time: " .. (endTime - startTime) * 1000 .. "ms")
     else
         print(err)
     end
-    print("Round Trip Time: " .. (endTime - startTime) * 1000 .. "ms")
 end
 
-queryOnce()
---queryThousand()
+
+--queryOnce()
+queryThousand()

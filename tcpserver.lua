@@ -1,8 +1,7 @@
 local socket = require("socket")
-local server = assert(socket.bind("*", 53333))
-local ip, port = server:getsockname()
 
 local function respondOnHello()
+    local server = assert(socket.bind("*", 53444))
     while true do
         local client = server:accept()
         client:settimeout(10)
@@ -14,6 +13,7 @@ local function respondOnHello()
             print(line)
             if line == "hello TCP" then
                 client:send("back at you TCP\n")
+                break
             end
         end
         ::continue::
@@ -24,6 +24,7 @@ local function respondOnHello()
 end
 
 local function respondAfterThousand()
+    local server = assert(socket.bind("*", 53333))
     local messageCount = 0
     local client = nil
     while not client do
@@ -38,7 +39,6 @@ local function respondAfterThousand()
                 break
             elseif line == "hello TCP" then
                 messageCount = messageCount + 1
-                print(messageCount .. ": " .. line)
             end
         else
             print(err)
@@ -50,5 +50,5 @@ local function respondAfterThousand()
     end
 end
 
-respondAfterThousand()
--- respondOnHello()
+respondOnHello()
+--respondAfterThousand()
